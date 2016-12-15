@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Art Quizzer</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <style>
+
+      .content {
+        width: 800px;
+        height: 600px;
+        background-color: white;
+        border-style: solid;
+
+        position:absolute; /*it can be fixed too*/
+        left:0; right:0;
+        top:0; bottom:0;
+        margin:auto;
+
+        /*this to solve "the content will not be cut when the window is smaller than the content": */
+        max-width:100%;
+        max-height:100%;
+        overflow:auto;
+
+        font-family: 'Lato', sans-serif;
+      }
+
+      .img {
+        width: 800px;
+        height: 450px;
+        left:0; right:0;
+        margin:auto;
+      }
+
+      .author {
+        text-align: center;
+      }
+
+      .piece {
+        text-align: center;
+      }
+
+      .date {
+        text-align: center;
+      }
+
+      .tracker {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class='tracker'></div>
+    <div class='content'>
+
+      <!-- Image -->
+      <div class='img'></div>
+
+      <!-- Author -->
+      <div class='author'></div>
+
+      <!-- Piece Name -->
+      <div class='piece'></div>
+
+      <!-- Date -->
+      <div class='date'></div>
+
+    </div>
+  </body>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+  <script type='text/javascript'>
+    $( document ).ready(function() {
+      var data = [
+        {
+          'img': 'img/1.png',
+          'author': 'Joseph Nicephore Niepce',
+          'piece': 'View from the Window at Gras',
+          'date': '1826-1827'
+        },
+        {
+          'img': 'img/2.png',
+          'author': 'Henri Matisse',
+          'piece': 'Le Bonheur de Vivre (The Joy of Life)',
+          'date': '1905–1906'
+        },
+        {
+          'img': 'img/3.png',
+          'author': 'Pablo Picasso',
+          'piece': 'Portrait of Gertrude Stein',
+          'date': '1905–1906'
+        },
+        {
+          'img': 'img/4.png',
+          'author': 'Pablo Picasso',
+          'piece': "Les Demoiselles d'Avignon",
+          'date': 1907
+        },
+        {
+          'img': 'img/5.png',
+          'author': 'George Braque',
+          'piece': 'The Portuguese',
+          'date': 1911
+        },
+        {
+          'img': 'img/6.png',
+          'author': 'Pablo Picasso',
+          'piece': 'Guitar',
+          'date': 1912
+        },
+        {
+          'img': 'img/7.png',
+          'author': 'Erich Heckel',
+          'piece': 'Standing Child',
+          'date': 1910
+        },
+        {
+          'img': 'img/8.png',
+          'author': 'Wassily Kandinsky',
+          'piece': 'Improvisation 28',
+          'date': 1912
+        },
+        {
+          'img': 'img/9.png',
+          'author': 'Kazimir Malevich',
+          'piece': 'Black Square',
+          'date': 1915
+        },
+        {
+          'img': 'img/10.png',
+          'author': 'Jean (Hans) Arp',
+          'piece': 'Untitled (Collage Arranged According to the Laws of Chance)',
+          'date': 1917
+        },
+        {
+          'img': 'img/11.png',
+          'author': 'Hanna Hoch',
+          'piece': 'Cut with the Kitchen Knife',
+          'date': 1920
+        },
+        {
+          'img': 'img/12.png',
+          'author': 'Marcel Duchamp',
+          'piece': 'Fountain',
+          'date': 1917
+        },
+        {
+          'img': 'img/13.png',
+          'author': 'Andre Masson',
+          'piece': 'Battle of Fishes',
+          'date': 1926
+        },
+        {
+          'img': 'img/14.png',
+          'author': 'Meret Oppenheim',
+          'piece': 'Object (Luncheon in Fur)',
+          'date': 1936
+        },
+        {
+          'img': 'img/15.png',
+          'author': 'Marcel Breuer',
+          'piece': 'Armchair Model 3B',
+          'date': '1928-1929'
+        },
+        {
+          'img': 'img/16.png',
+          'author': 'Adolf Ziegler',
+          'piece': 'The Four Elements',
+          'date': 1937
+        },
+        {
+          'img': 'img/17.png',
+          'author': 'Jackson Pollock',
+          'piece': 'Autumn Rhythm No. 1A',
+          'date': 1948
+        },
+        {
+          'img': 'img/18.png',
+          'author': 'Robert Rauschenberg',
+          'piece': 'Erased de Kooning Drawing',
+          'date': 1953
+        },
+        {
+          'img': 'img/19.png',
+          'author': 'Andy Warhol',
+          'piece': 'Brillo Box',
+          'date': 1964
+        },
+        {
+          'img': 'img/20.png',
+          'author': 'Robert Morris',
+          'piece': 'Installation view of Robert Morris exhibition at Green Gallery',
+          'date': 1963
+        },
+        {
+          'img': 'img/21.png',
+          'author': 'Joseph Kosuth',
+          'piece': 'One and Three Chairs',
+          'date': 1965
+        },
+        {
+          'img': 'img/22.png',
+          'author': 'Joseph Beuys',
+          'piece': 'I Like America and America Likes Me',
+          'date': 1974
+        },
+        {
+          'img': 'img/23.png',
+          'author': 'Robert Smithson',
+          'piece': 'Spiral Jetty',
+          'date': 1970
+        },
+        {
+          'img': 'img/24.png',
+          'author': 'Cindy Sherman',
+          'piece': 'Untitled Fil Still #21',
+          'date': 1978
+        }
+      ];
+
+      function shuffle(array) {
+        var currentIndex = array.length, temporaryValue, randomIndex;
+
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
+
+          // Pick a remaining element...
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex -= 1;
+
+          // And swap it with the current element.
+          temporaryValue = array[currentIndex];
+          array[currentIndex] = array[randomIndex];
+          array[randomIndex] = temporaryValue;
+        }
+
+        return array;
+      }
+
+      // Randomly shuffle array
+      data = shuffle(data);
+      var currentIndex = 0;
+
+      // Append image
+      $('.img').append("<img src=\"" + data[currentIndex].img + '"' + ' \"height=450\"' + ' \"width=800\">');
+
+      // Append Author
+      $('.author').append('<h2>' + 'Author: ' + data[currentIndex].author + '</h2>');
+      // Toggle author
+      $('.author').toggle()
+
+      // Append Piece Name
+      $('.piece').append('<h2>' + 'Piece: ' + data[currentIndex].piece + '</h2>');
+      // Toggle piece
+      $('.piece').toggle()
+
+      // Append Date 
+      $('.date').append('<h2>' + 'Date: ' + data[currentIndex].date.toString() + '</h2>');
+      // Toggle date
+      $('.date').toggle()
+
+      // Append slide number
+      $('.tracker').append('<h1>' + Number(currentIndex + 1) + '/' + Number(data.length) + '</h1>');
+
+      $(document).keydown(function(e) {
+        // Left keypress
+        if (e.keyCode == 37) { 
+          if (($('.author').is(":visible"))) {
+            $('.author').toggle();
+          }
+
+          if (($('.piece').is(":visible"))) {
+            $('.piece').toggle();
+          }
+
+          if (($('.date').is(":visible"))) {
+            $('.date').toggle();
+          }
+          if (currentIndex != 0) {
+            currentIndex -= 1;
+            $('.img').find(':first-child').remove();
+            $('.img').append("<img src=\"" + data[currentIndex].img + '"' + ' \"height=450\"' + ' \"width=800\">');
+
+            $('.author').find(':first-child').remove();
+            $('.author').append('<h2>' + 'Author: ' + data[currentIndex].author + '</h2>');
+
+            $('.piece').find(':first-child').remove();
+            $('.piece').append('<h2>' + 'Piece: ' + data[currentIndex].piece + '</h2>');
+
+            $('.date').find(':first-child').remove();
+            $('.date').append('<h2>' + 'Date: ' + data[currentIndex].date.toString() + '</h2>');
+            console.log('The current index: ', currentIndex);
+            $('.tracker').find(':first-child').remove();
+            $('.tracker').append('<h1>' + Number(currentIndex + 1) + '/' + Number(data.length) + '</h1>');
+          }
+        }
+
+        if (e.keyCode == 39) {
+          if (($('.author').is(":visible"))) {
+            $('.author').toggle();
+          }
+
+          if (($('.piece').is(":visible"))) {
+            $('.piece').toggle();
+          }
+
+          if (($('.date').is(":visible"))) {
+            $('.date').toggle();
+          }
+          if (currentIndex != 23) {
+            currentIndex += 1;
+            $('.img').find(':first-child').remove();
+            $('.img').append("<img src=\"" + data[currentIndex].img + '"' + ' \"height=450\"' + ' \"width=800\">');
+
+            $('.author').find(':first-child').remove();
+            $('.author').append('<h2>' + 'Author: ' + data[currentIndex].author + '</h2>');
+
+            $('.piece').find(':first-child').remove();
+            $('.piece').append('<h2>' + 'Piece: ' + data[currentIndex].piece + '</h2>');
+
+            $('.date').find(':first-child').remove();
+            $('.date').append('<h2>' + 'Date: ' + data[currentIndex].date.toString() + '</h2>');
+
+            $('.tracker').find(':first-child').remove();
+            $('.tracker').append('<h1>' + Number(currentIndex + 1) + '/' + Number(data.length) + '</h1>');
+          }
+        }
+
+        if (e.keyCode == 40) {
+          console.log('keypress on down');
+          if (!($('.author').is(":visible"))) {
+            $('.author').toggle();
+          }
+
+          if (!($('.piece').is(":visible"))) {
+            $('.piece').toggle();
+          }
+
+          if (!($('.date').is(":visible"))) {
+            $('.date').toggle();
+          }
+        }
+      });
+    });
+  </script>
+</html>
